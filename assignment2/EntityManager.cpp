@@ -1,39 +1,32 @@
 #include "EntityManager.h"
 
-EntityManager::EntityManager()
-{
-
-}
+EntityManager::EntityManager() = default;
 
 // called at beginning of each frame by game engine
 // entities added will now be available to use this frame
-void EntityManager::update()
-{
+void EntityManager::update() {
     // TODO:
     // - add entities from m_entitiesToAdd to the proper location(s)
     // - add them to the vector of all entities
-    // - ad them to the vector inside the map, with the tag as a key
-    for (auto e: m_entitiesToAdd)
-    {
-        m_entities.push_back(e);
-        m_entityMap[e->tag].push_back(e);
-    }
+    // - add them to the vector inside the map, with the tag as a key
+//    for (auto e: m_entitiesToAdd) {
+//        m_entities.push_back(e);
+//        m_entityMap[e->tag].push_back(e);
+//    }
 
     // remove dead entities from the vector of all entities
     removeDeadEntities(m_entities);
 
     // remove dead entities from each vector in the entity map
     // C++20 way ot iterating through [key, value] pairs in a map
-    for (auto& [tag, entityVec] : m_entityMap)
-    {
-        removeDeadEntities(entityVec);
-    }
+//    for (auto &[tag, entityVec]: m_entityMap) {
+//        removeDeadEntities(entityVec);
+//    }
 
     m_entitiesToAdd.clear();
 }
 
-EntityManager::removeDeadEntities(EntityVec & vec)
-{
+void EntityManager::removeDeadEntities(EntityVec &vec) {
     // TODO: remove all dead entities from the input vecotr
     // this is called by the update() function
 
@@ -48,8 +41,7 @@ EntityManager::removeDeadEntities(EntityVec & vec)
     // }
 }
 
-std::shared_ptr<Entity> EntityManager::addEntity(const std::string& tag)
-{
+std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
     // // create a new Entity object
     // // store it in the vector of all entities
     // // store it in the map of tag->entityvector
@@ -58,26 +50,23 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string& tag)
     // m_entities.push_back(e);
     // m_entityMap[tag].push_back(e);
     // return e;
-    
+
     auto entity = std::shared_ptr<Entity>(new Entity(m_totalEntities++, tag));
-    m_entitiesToAdd.push_back(enetity);
+    m_entitiesToAdd.push_back(entity);
     return entity;
 }
 // note: above code doesn't handle some map-related edge cases
 
-const EntityVec & EntityManager::getEntities()
-{
+EntityVec & EntityManager::getEntities() {
     return m_entities;
 }
 
-EntityVec& EntityManager::getEntities(const std::string& tag)
-{
+EntityVec &EntityManager::getEntities(const std::string &tag) {
     // TODO: check edge cases
     return m_entityMap[tag];
 }
 
-const std::map<std::string, EntityVec>& EntityManager::getEntityMap()
-{
+const std::map<std::string, EntityVec> &EntityManager::getEntityMap() {
     return m_entityMap;
 }
 

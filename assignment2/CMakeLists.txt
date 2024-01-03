@@ -1,6 +1,4 @@
-add_executable(comp4300a2
-    main.cpp
-    Vec2.cpp)
+add_executable(comp4300a2 main.cpp Entity.cpp EntityManager.cpp Game.cpp Vec2.cpp)
 target_link_libraries(comp4300a2 PRIVATE sfml-graphics)
 target_link_libraries(comp4300a2 PRIVATE sfml-imgui)
 target_compile_features(comp4300a2 PRIVATE cxx_std_17)
