@@ -11,7 +11,9 @@ public:
 
     Shape() = default;
 
-    virtual void Draw(sf::RenderWindow& window) const = 0;
+    virtual void Draw(sf::RenderWindow &window) const = 0;
+
+    virtual void Update() = 0;
 };
 
 #endif //COMP4300_SHAPE_H
