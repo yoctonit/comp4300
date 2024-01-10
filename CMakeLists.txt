@@ -13,4 +13,6 @@ FetchContent_MakeAvailable(SFML)
 add_subdirectory(deps)
 
 add_subdirectory(assignment1)
+add_subdirectory(assignment1_solution)
+
 add_subdirectory(assignment2)

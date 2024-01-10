@@ -8,6 +8,7 @@ add_library(sfml-imgui
     )
 target_link_libraries(sfml-imgui PRIVATE sfml-graphics)
 target_include_directories(sfml-imgui PUBLIC imgui)
+target_compile_features(sfml-imgui PRIVATE cxx_std_17)
 
 # imgui/imconfig-SFML.h
 # imgui/imconfig.h
