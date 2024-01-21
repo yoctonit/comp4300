@@ -1,0 +1,46 @@
+// collision programming involves 2 stages
+// collision detection
+// collision resolution
+
+// point inside AABB
+// px > x1 && px < x2
+// py > y1 && py < y2
+
+// AABB intersection
+// two AABB intersect if they overlap both horizontally and vertically
+
+// AABB Horizontal Overlap
+// - occurs if the top of each box is higher than the bottom of the other
+// y1 < y2 + h2
+// y2 < y1 + h1
+
+// AABB Vertical Overlap
+// - occurs if the left of each box is less than the right of the other
+// x1 < x2 + w2
+// x2 < x1 + w1
+
+// Our game engine uses the CENTER of the entity as the position for the AABB
+class CTransform: public Component
+{
+    Vec2 pos = { 0.0, 0.0 };
+    Vec2 prevPos = { 0.0, 0.0 };
+    Vec2 scale = { 1.0, 1.0 };
+    Vec2 speed = { 0.0, 0.0 };
+    float angle = 0;
+};
+
+class CboundingBox : public Component
+{
+public:
+    Vec2 size;
+    Vec2 halfSize;
+    CBoundingBox(const Vec2 & s) : size(s), halfSize(s.x/2, s.y/2) {}
+};
+
+dx = abs(x2 - x1);
+// overlap in x-direction:
+ox = (w2 / 2) + (w1 / 2) - dx // positive if x overlap
+dy = abs(y2 -y2)
+// overlap in y-direction
+oy = (h2 / 2) + (h1 / 2) - dy // positive if y overlap
+overlap = [ox, oy]

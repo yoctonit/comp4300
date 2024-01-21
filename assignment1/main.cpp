@@ -127,7 +127,7 @@ int main(int argc, char* argv[])
         circle.setPointCount(circleSegments);
         circle.setRadius(circleRadius);
 
-        // basic animation - move the each frame if it's still in frame
+        // basic animation - move each shape if it's still in frame
         circle.setPosition(circle.getPosition().x + circleSpeedX, circle.getPosition().y + circleSpeedY);
 
         // basic rendering function calls
