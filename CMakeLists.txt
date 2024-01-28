@@ -16,3 +16,4 @@ add_subdirectory(assignment1)
 add_subdirectory(assignment1_solution)
 
 add_subdirectory(assignment2)
+add_subdirectory(assignment2_solution)
