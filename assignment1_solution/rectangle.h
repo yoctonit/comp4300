@@ -9,11 +9,15 @@ class Rectangle : public Shape {
     RectangleConfig m_config;
     sf::RectangleShape m_shape;
 public:
-    explicit Rectangle(RectangleConfig rc, const FontConfig &fc, sf::Font &font);
+    explicit Rectangle(const RectangleConfig& sc, const FontConfig &fc, sf::Font &font, WindowConfig wc);
 
     void Draw(sf::RenderWindow &window) const override;
 
-    virtual void Update() override;
+    void Update() override;
+
+    void SetColor() override;
+
+    void CalculateNamePosition() override;
 };
 
 #endif //COMP4300_RECTANGLE_H

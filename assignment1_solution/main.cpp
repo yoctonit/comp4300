@@ -69,10 +69,10 @@ int main() {
 
     std::vector<std::shared_ptr<Shape>> shapes;
     for (const auto &shapeConfig: config.Rectangles()) {
-        shapes.push_back(std::make_shared<Rectangle>(shapeConfig, fontConfig, myFont));
+        shapes.push_back(std::make_shared<Rectangle>(shapeConfig, fontConfig, myFont, config.Window()));
     }
     for (const auto &shapeConfig: config.Circles()) {
-        shapes.push_back(std::make_shared<Circle>(shapeConfig, fontConfig, myFont));
+        shapes.push_back(std::make_shared<Circle>(shapeConfig, fontConfig, myFont, config.Window()));
     }
 
     // main loop - continues for each frame while window is open
@@ -116,27 +116,65 @@ int main() {
         // update imgui for this frame with the time that the last frame took
         ImGui::SFML::Update(window, deltaClock.restart());
 
+//        ImGui::ShowDemoWindow();
+
         // draw the UI
         ImGui::Begin("Window title");
-        ImGui::Text("Window text!");
-        ImGui::Checkbox("Draw Circle", &drawCircle);
-        ImGui::SameLine();
-        ImGui::Checkbox("Draw Text", &drawText);
-        ImGui::SliderFloat("Radius", &circleRadius, 0.0f, 300.0f);
-        ImGui::SliderInt("Sides", &circleSegments, 3, 64);
-        ImGui::ColorEdit3("Color Circle", c);
-        ImGui::InputText("Text", displayString, 255);
+        ImGui::Text("Select shape");
+//        const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD", "EEEE", "FFFF", "GGGG", "HHHH", "IIII", "JJJJ", "KKKK", "LLLLLLL", "MMMM", "OOOOOOO" };
+//        static int item_current_idx = 0; // Here we store our selection data as an index.
+//        if (ImGui::BeginListBox("Shapes"))
+//        {
+//            for (int n = 0; n < shapes.size(); n++)
+//            {
+//                const bool is_selected = (item_current_idx == n);
+//                std::string shapeName = shapes[n]->m_text.getString();
+//                if (ImGui::Selectable(shapeName.c_str(), is_selected))
+//                    item_current_idx = n;
+//
+//                // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+//                if (is_selected)
+//                    ImGui::SetItemDefaultFocus();
+//            }
+//            ImGui::EndListBox();
+//        }
+//        const char* items[] = { "AAAA", "BBBB", "CCCC", "DDDD", "EEEE", "FFFF", "GGGG", "HHHH", "IIII", "JJJJ", "KKKK", "LLLLLLL", "MMMM", "OOOOOOO" };
+        static int item_current_idx = 0; // Here we store our selection data as an index.
+        if (ImGui::BeginCombo("shape", shapes[item_current_idx]->Name().c_str(), ImGuiComboFlags_PopupAlignLeft)) {
+            for (int n = 0; n < shapes.size(); n++) {
+                const bool is_selected = (item_current_idx == n);
+                std::string name = shapes[n]->Name();
+                if (ImGui::Selectable(shapes[n]->Name().c_str(), is_selected))
+                    item_current_idx = n;
+
+                // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                if (is_selected)
+                    ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
+        }
+        ImGui::Checkbox("Draw Shape", &shapes[item_current_idx]->Visibility());
+        ImGui::SliderFloat("Scale", shapes[item_current_idx]->ScaleRef(), 0.0f, 4.0f);
+        ImGui::SliderFloat("VelocityX", shapes[item_current_idx]->VelocityXRef(), -8.0f, 8.0f);
+        ImGui::SliderFloat("VelocityY", shapes[item_current_idx]->VelocityYRef(), -8.0f, 8.0f);
+//        ImGui::SameLine();
+//        ImGui::Checkbox("Draw Text", &drawText);
+//        ImGui::SliderFloat("Radius", &circleRadius, 0.0f, 300.0f);
+//        ImGui::SliderInt("Sides", &circleSegments, 3, 64);
+        ImGui::ColorEdit3("Color Shape", shapes[item_current_idx]->Color());
+        ImGui::InputText("Name", displayString, 255);
         if (ImGui::Button("Set Text")) {
-            text.setString(displayString);
+//            text.setString(displayString);
+            shapes[item_current_idx]->SetName(displayString);
         }
-        ImGui::SameLine();
-        if (ImGui::Button("Reset Circle")) {
-            circle.setPosition(0, 0);
-        }
+//        ImGui::SameLine();
+//        if (ImGui::Button("Reset Circle")) {
+//            circle.setPosition(0, 0);
+//        }
         ImGui::End();
 
         // set the circle properties, because they may have been updated with the ui
-        circle.setFillColor(sf::Color(c[0] * 255, c[1] * 255, c[2] * 255));
+        shapes[item_current_idx]->SetColor();
         circle.setPointCount(circleSegments);
         circle.setRadius(circleRadius);
 
@@ -149,14 +187,14 @@ int main() {
 
         // basic rendering function calls
         window.clear();     // clear the window of anything previously drawn
-        if (drawCircle)     // draw the circle if the boolean is true
-        {
-            window.draw(circle);
-        }
-        if (drawText)       // draw the text if the boolean is true
-        {
-            window.draw(text);
-        }
+//        if (drawCircle)     // draw the circle if the boolean is true
+//        {
+//            window.draw(circle);
+//        }
+//        if (drawText)       // draw the text if the boolean is true
+//        {
+//            window.draw(text);
+//        }
         for (const auto &shape: shapes) {
             shape->Draw(window);
         }

@@ -6,14 +6,19 @@
 
 
 class Circle : public Shape {
-    CircleConfig m_config;
+private:
     sf::CircleShape m_shape;
+
 public:
-    explicit Circle(CircleConfig rc, const FontConfig& fc, sf::Font& font);
+    explicit Circle(const CircleConfig& sc, const FontConfig &fc, sf::Font &font, WindowConfig wc);
 
-    void Draw(sf::RenderWindow& window) const override;
+    void Draw(sf::RenderWindow &window) const override;
 
-    virtual void Update() override;
+    void Update() override;
+
+    void SetColor() override;
+
+    void CalculateNamePosition() override;
 };
 
 #endif //COMP4300_CIRCLE_H
