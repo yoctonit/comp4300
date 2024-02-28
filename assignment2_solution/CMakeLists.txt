@@ -1,4 +1,4 @@
-add_executable(comp4300a2sol main.cpp Entity.cpp EntityManager.cpp Game.cpp vec2.cpp)
+add_executable(comp4300a2sol main.cpp Entity.cpp EntityManager.cpp Game.cpp vec2.cpp config.cpp)
 target_link_libraries(comp4300a2sol PRIVATE sfml-graphics)
 target_link_libraries(comp4300a2sol PRIVATE sfml-imgui)
 target_compile_features(comp4300a2sol PRIVATE cxx_std_17)
@@ -14,3 +14,4 @@ endif()
 install(TARGETS comp4300a2sol)
 
 add_executable(test_vec2 vec2_test.cpp vec2.cpp)
+add_executable(temp temp.cpp)

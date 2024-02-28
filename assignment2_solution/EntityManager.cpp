@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "EntityManager.h"
 
 EntityManager::EntityManager() = default;
@@ -5,14 +6,13 @@ EntityManager::EntityManager() = default;
 // called at beginning of each frame by game engine
 // entities added will now be available to use this frame
 void EntityManager::update() {
-    // TODO:
     // - add entities from m_entitiesToAdd to the proper location(s)
     // - add them to the vector of all entities
     // - add them to the vector inside the map, with the tag as a key
-//    for (auto e: m_entitiesToAdd) {
-//        m_entities.push_back(e);
-//        m_entityMap[e->tag].push_back(e);
-//    }
+    for (const auto& entity: m_entitiesToAdd) {
+        m_entities.push_back(entity);
+        m_entityMap[entity->tag()].push_back(entity);
+    }
 
     // remove dead entities from the vector of all entities
     removeDeadEntities(m_entities);
@@ -22,13 +22,20 @@ void EntityManager::update() {
 //    for (auto &[tag, entityVec]: m_entityMap) {
 //        removeDeadEntities(entityVec);
 //    }
+    for (auto &[tag, entityVec]: m_entityMap) {
+        removeDeadEntities(entityVec);
+    }
 
     m_entitiesToAdd.clear();
 }
 
 void EntityManager::removeDeadEntities(EntityVec &vec) {
-    // TODO: remove all dead entities from the input vecotr
+    // TODO: remove all dead entities from the input vector
     // this is called by the update() function
+    vec.erase(std::remove_if(vec.begin(),
+                   vec.end(),
+                   [](const pEntity& e) { return !e->isActive(); }),
+               vec.end());
 
     // for (auto e: m_entities)
     // {
@@ -44,7 +51,7 @@ void EntityManager::removeDeadEntities(EntityVec &vec) {
 std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
     // // create a new Entity object
     // // store it in the vector of all entities
-    // // store it in the map of tag->entityvector
+    // // store it in the map of tag->entityVector
     // // return the shared pointer pointing to that entity
     // auto e = std::make_shared<Entity>(tag, m_totalEntities++);
     // m_entities.push_back(e);
@@ -53,6 +60,7 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
 
     auto entity = std::shared_ptr<Entity>(new Entity(m_totalEntities++, tag));
     m_entitiesToAdd.push_back(entity);
+    // m_entityMap[tag].push_back(entity);
     return entity;
 }
 // note: above code doesn't handle some map-related edge cases
@@ -63,6 +71,10 @@ EntityVec & EntityManager::getEntities() {
 
 EntityVec &EntityManager::getEntities(const std::string &tag) {
     // TODO: check edge cases
+//    EntityVec empty{};
+//    if (m_entityMap.find(tag) == m_entityMap.end()) {
+//        return;
+//    }
     return m_entityMap[tag];
 }
 

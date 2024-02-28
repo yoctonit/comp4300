@@ -1,0 +1,76 @@
+Texture     TexStand    images/megaman/stand64.png
+Texture     TexRun      images/megaman/run64.png
+Texture     TexAir      images/megaman/air64.png
+Texture     TexBuster   images/megaman/buster.png
+Texture     TexExplode  images/misc/explosion96.png
+Texture     TexCoin     images/misc/coinspin.png
+Texture     TexBrick    images/mario/brick.png
+Texture     TexQ        images/mario/qfade.png
+Texture     TexQ2       images/mario/question2.png
+Texture     TexPipeS    images/mario/pipesmall.png
+Texture     TexPipeT    images/mario/pipetall.png
+Texture     TexCloudB   images/mario/cloudbig.png
+Texture     TexCloudS   images/mario/cloudsmall.png
+Texture     TexBush     images/mario/bush.png
+Texture     TexBushBig  images/mario/bushbig.png
+Texture     TexGround   images/mario/ground.png
+Texture     TexBlock    images/mario/block.png
+Texture     TexPole     images/mario/flagpole.png
+Texture     TexPoleTop  images/mario/flagtop.png
+Texture     TexFlag     images/mario/flag.png
+Animation   Stand       TexStand    1  0
+Animation   Run         TextRun     4 10
+Animation   Air         TexAir      1  0
+Animation   Buster      TexBuster   1  0
+Animation   Explosion   TexExplode 48  4
+Animation   Coin        TexCoin     6  5
+Animation   Brick       TexBrick    1  0
+Animation   Question    TexQ        4 10
+Animation   Question2   TexQ2       1  0
+Animation   PipeSmall   TexPipeS    1  0
+Animation   PipeTall    TexPipeT    1  0
+Animation   CloudBig    TexCloudB   1  0
+Animation   CloudSmall  TexCloudS   1  0
+Animation   Bush        TexBush     1  0
+Animation   BushBig     TexBushBig  1  0
+Animation   Ground      TexGround   1  0
+Animation   Block       TexBlock    1  0
+Animation   Pole        TexPole     1  0
+Animation   PoleTop     TexPoleTop  1  0
+Animation   Flag        TexFlag     1  0
+Font        Tech        fonts/tech.ttf
+Font        Mario       fonts/mario.ttf
+Font        Megaman     fonts/megaman.ttf
+
+Texture     4           ../sync/bin/images/megaman/megaStand.png
+Texture     5           ../sync/bin/images/megaman/megaShot.png
+Texture     2           ../sync/bin/images/megaman/megaRun.png
+Texture     3           ../sync/bin/images/megaman/megaJump.png
+Texture     6           ../sync/bin/images/megaman/megaBuster.png
+Texture     1           ../sync/bin/images/mario/ground.png
+Texture     12          ../sync/bin/images/mario/SmallCloud.png
+Texture     7           ../sync/bin/images/animations/explosion.png
+Texture     8           ../sync/bin/images/mario/BigBush.png
+Texture     10          ../sync/bin/images/mario/SmallBush.png
+Texture     13          ../sync/bin/images/mario/GoombaWalk.png
+Texture     14          ../sync/bin/images/mario/Busher.png
+Texture     15          ../sync/bin/images/mario/SmallPipe.png
+Texture     16          ../sync/bin/images/mario/BigCloud.png
+Texture     17          ../sync/bin/images/mario/GoombaDeath.png
+Animation   1           1           1   1
+Animation   2           2           3   8
+Animation   3           3           1   1
+Animation   4           4           1   1
+Animation   5           5           1   1
+Animation   6           6           1   1
+Animation   7           7           12  8
+Animation   10          8           1   1
+Animation   12          12          1   1
+Animation   14          10           1   1
+Animation   15          15           1   1
+Animation   16          14           1   1
+Animation   17          13           2   8
+Animation   18          16           1   1
+Animation   19          17           2   6
+Font        1           ../sync/bin/fonts/numbers.ttf
+Font        2           ../sync/bin/fonts/pixeled.ttf

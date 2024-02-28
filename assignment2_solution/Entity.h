@@ -10,9 +10,9 @@
 class Entity {
     friend class EntityManager;
 
-    bool m_active = true;
     const size_t m_id = 0;
     const std::string m_tag = "default";
+    bool m_active = true;
 
     Entity(size_t id, std::string tag);
 
