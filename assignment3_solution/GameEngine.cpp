@@ -68,7 +68,7 @@ void GameEngine::sUserInput() {
             }
 
             // determine start or end action by whether it was key press or release
-            const std::string actionType = (event.type == sf::Event::KeyPressed) ? "START" : " END";
+            const std::string actionType = (event.type == sf::Event::KeyPressed) ? "START" : "END";
 
             // look up the action and send the action to the scene
             currentScene()->doAction(Action(currentScene()->getActionMap().at(event.key.code), actionType));
@@ -78,7 +78,7 @@ void GameEngine::sUserInput() {
 
 void GameEngine::changeScene(const std::string &sceneName, std::shared_ptr<Scene> scene, bool endCurrentScene) {
     m_currentScene = sceneName;
-    m_sceneMap[sceneName] = scene;
+    m_sceneMap[sceneName] = std::move(scene);
 }
 
 void GameEngine::quit() {
