@@ -25,7 +25,17 @@ vec2 Physics::GetPreviousOverlap(const std::shared_ptr<Entity> &a, const std::sh
 }
 
 bool Physics::IsInside(const vec2 &pos, const std::shared_ptr<Entity> &entity) {
-    // Student TODO
+    vec2 eSize = entity->get<CAnimation>().animation.getSize();
+    vec2 ePos = entity->get<CTransform>().pos;
+
+    if (pos.x > ePos.x - eSize.x / 2 &&
+        pos.x < ePos.x + eSize.x / 2 &&
+        pos.y > ePos.y - eSize.y / 2 &&
+        pos.y < ePos.y + eSize.y / 2) {
+        // std::cout << entity->getComponent<CAnimation>().animation.name() << "\n";
+        return true;
+    }
+
     return false;
 }
 

@@ -9,7 +9,7 @@
 class Action {
     std::string m_name;
     std::string m_type;
-    vec2 m_pos;
+    vec2 m_pos = vec2(0.0f, 0.0f);
 
 public:
     Action();
@@ -20,13 +20,13 @@ public:
 
     Action(std::string name, std::string type, vec2 pos);
 
-    const std::string &name() const;
+    [[nodiscard]] const std::string &name() const;
 
-    const std::string &type() const;
+    [[nodiscard]] const std::string &type() const;
 
-    const vec2 &pos() const;
+    [[nodiscard]] const vec2 &pos() const;
 
-    std::string toString() const;
+    [[nodiscard]] std::string toString() const;
 };
 
 #endif //ACTION_H

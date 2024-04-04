@@ -60,6 +60,7 @@ void Scene_Zelda::spawnPlayer() {
     p->add<CTransform>(vec2(640, 480));
     p->add<CAnimation>(m_game->assets().getAnimation("LinkStandDown"), true);
     p->add<CBoundingBox>(vec2(640, 480), vec2(48, 48), true, false);
+    p->add<CDraggable>(); // just to test draggable
     p->add<CHealth>(7, 3);
 
     // TODO:
@@ -82,6 +83,7 @@ void Scene_Zelda::update() {
     // TODO:
     // Implement pause functionality
 
+    sDrag();
     sAI();
     sMovement();
     sStatus();
@@ -139,6 +141,10 @@ void Scene_Zelda::sDoAction(const Action &action) {
     // Only the setting of the player's input component variables should be set here
     // Do minimal logic in this function
 
+    if (action.name() == "MOUSE_MOVE") {
+        m_mousePos = action.pos();
+    }
+
     if (action.type() == "START") {
         if (action.name() == "PAUSE") {
             setPaused(!m_paused);
@@ -152,6 +158,17 @@ void Scene_Zelda::sDoAction(const Action &action) {
             m_drawCollision = !m_drawCollision;
         } else if (action.name() == "TOGGLE_GRID") {
             m_drawGrid = !m_drawGrid;
+        } else if (action.name() == "LEFT_CLICK") {
+            // detect the picking up of entities
+            vec2 wPos = windowToWorld(m_mousePos);
+            for (const auto &entity: m_entityManager.getEntities()) {
+                if (!entity->has<CDraggable>()) { continue; }
+
+                if (Physics::IsInside(wPos, entity)) {
+                    auto &dragging = entity->get<CDraggable>().dragging;
+                    dragging = !dragging;
+                }
+            }
         }
     } else if (action.type() == "END") {
 
@@ -224,7 +241,7 @@ void Scene_Zelda::sRender() {
 
     // draw all Entity textures / animations
     if (m_drawTextures) {
-        for (const auto& entity: m_entityManager.getEntities()) {
+        for (const auto &entity: m_entityManager.getEntities()) {
             auto &transform = entity->get<CTransform>();
             sf::Color c = sf::Color::White;
             if (entity->has<CInvincibility>()) {
@@ -244,7 +261,7 @@ void Scene_Zelda::sRender() {
             }
         }
 
-        for (const auto& entity: m_entityManager.getEntities()) {
+        for (const auto &entity: m_entityManager.getEntities()) {
             auto &transform = entity->get<CTransform>();
             if (entity->has<CHealth>()) {
                 auto &h = entity->get<CHealth>();
@@ -280,7 +297,7 @@ void Scene_Zelda::sRender() {
     if (m_drawCollision) {
         // draw bounding box
         sf::CircleShape dot(4);
-        for (const auto& entity: m_entityManager.getEntities()) {
+        for (const auto &entity: m_entityManager.getEntities()) {
             if (entity->has<CBoundingBox>()) {
                 auto &box = entity->get<CBoundingBox>();
                 sf::RectangleShape rect;
@@ -396,7 +413,7 @@ std::shared_ptr<Entity> Scene_Zelda::player() {
 void Scene_Zelda::changePlayerStateTo(const std::string &state, const vec2 &facing) {
 }
 
-vec2 Scene_Zelda::posWinToWorld(const vec2 &pos) {
+vec2 Scene_Zelda::windowToWorld(const vec2 &pos) {
     auto view = m_game->window().getView();
     float wx = view.getCenter().x - width() / 2.0f;
     float wy = view.getCenter().y - height() / 2.0f;
@@ -404,15 +421,20 @@ vec2 Scene_Zelda::posWinToWorld(const vec2 &pos) {
 }
 
 void Scene_Zelda::sDrag() {
-//    for (auto e: m_entityManager.getEntities()) {
-//        if (e->has<CDraggable>()) {
-//            if (e->get<CDraggable>().dragging) {
-//                vec2 wPos = posWinToWorld(m_mousePos);
-//                e->get<CTransform>().pos = wPos;
-//                e->get<CBoundingBox>().center = wPos;
+    for (const auto &entity: m_entityManager.getEntities()) {
+        if (entity->has<CDraggable>() && entity->get<CDraggable>().dragging) {
+            vec2 wPos = windowToWorld(m_mousePos);
+            entity->get<CTransform>().pos = wPos;
+            entity->get<CBoundingBox>().center = wPos;
+        }
+//        if (entity->has<CDraggable>()) {
+//            if (entity->get<CDraggable>().dragging) {
+//                vec2 wPos = windowToWorld(m_mousePos);
+//                entity->get<CTransform>().pos = wPos;
+//                entity->get<CBoundingBox>().center = wPos;
 //            }
 //        }
-//    }
+    }
 }
 
 vec2 Scene_Zelda::getRoomXY(const vec2 &pos) {

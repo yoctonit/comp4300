@@ -15,7 +15,7 @@ class Scene_Zelda : public Scene {
 
 protected:
     std::string m_levelPath;
-    PlayerConfig m_playerConfig;
+    PlayerConfig m_playerConfig{};
 
     bool m_drawTextures = true;
     bool m_drawCollision = false;
@@ -25,7 +25,7 @@ protected:
     const vec2 m_gridSize = {64, 64};
     sf::Text m_gridText;
 
-    // vec2 m_mousePos;
+    vec2 m_mousePos;
 
     void init(const std::string &levelPath);
 
@@ -40,8 +40,6 @@ protected:
     vec2 getPosition(int rx, int ry, int tx, int ty) const;
 
     std::shared_ptr<Entity> player();
-
-    // void drawLine(const vec2& p1, const vec2& p2);
 
     void sDoAction(const Action &action) override;
 
@@ -63,13 +61,11 @@ protected:
 
     void sDrag();
 
-    // void setPaused(bool pause);
-
     // void changePlayerStateTo(std::string s);
 
     void changePlayerStateTo(const std::string &state, const vec2 &facing);
 
-    vec2 posWinToWorld(const vec2 &pos);
+    vec2 windowToWorld(const vec2 &pos);
 
     vec2 getRoomXY(const vec2 &pos);
 
