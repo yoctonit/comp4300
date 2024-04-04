@@ -1,0 +1,85 @@
+Texture TexArmosStandBack assets/images/zelda_armos_sb.png
+Texture TexArmosStandFront assets/images/zelda_armos_sf.png
+Texture TexBlack assets/images/zelda_black.png
+Texture TexBush assets/images/zelda_bush.png
+Texture TexLake1 assets/images/zelda_lake1.png
+Texture TexLake2 assets/images/zelda_lake2.png
+Texture TexLake3 assets/images/zelda_lake3.png
+Texture TexLake4 assets/images/zelda_lake4.png
+Texture TexLake5 assets/images/zelda_lake5.png
+Texture TexLake6 assets/images/zelda_lake6.png
+Texture TexLake7 assets/images/zelda_lake7.png
+Texture TexLake8 assets/images/zelda_lake8.png
+Texture TexLake9 assets/images/zelda_lake9.png
+Texture TexAtkDown assets/images/zelda_link_atkd.png
+Texture TexAtkRight assets/images/zelda_link_atkr.png
+Texture TexAtkUp assets/images/zelda_link_atku.png
+Texture TexMoveDown assets/images/zelda_link_mvd.png
+Texture TexMoveRight assets/images/zelda_link_mvr.png
+Texture TexMoveUp assets/images/zelda_link_mvu.png
+Texture TexStandDown assets/images/zelda_link_sd.png
+Texture TexStandRight assets/images/zelda_link_sr.png
+Texture TexStandUp assets/images/zelda_link_su.png
+Texture TexRock1 assets/images/zelda_rock1.png
+Texture TexRock2 assets/images/zelda_rock2.png
+Texture TexRock3 assets/images/zelda_rock3.png
+Texture TexRock4 assets/images/zelda_rock4.png
+Texture TexRock5 assets/images/zelda_rock5.png
+Texture TexRock6 assets/images/zelda_rock6.png
+Texture TexStair assets/images/zelda_stair.png
+Texture TexTektiteStandFront assets/images/zelda_tektite_sf.png
+Texture TexTreeMonster1 assets/images/zelda_treemonster1.png
+Texture TexTreeMonster2 assets/images/zelda_treemonster2.png
+Texture TexTreeMonster3 assets/images/zelda_treemonster3.png
+Texture TexTreeMonster4 assets/images/zelda_treemonster4.png
+Texture TexTreeMonster5 assets/images/zelda_treemonster5.png
+Texture TexTreeMonster6 assets/images/zelda_treemonster6.png
+Texture TexHeart assets/images/zelda_heart.png
+Animation ArmosStandBack TexArmosStandBack 2 12
+Animation ArmosStandFront TexArmosStandFront 2 12
+Animation TileBlack TexBlack 1 0
+Animation TileBush TexBush 1 0
+Animation TileLake1 TexLake1 1 0
+Animation TileLake2 TexLake2 1 0
+Animation TileLake3 TexLake3 1 0
+Animation TileLake4 TexLake4 1 0
+Animation TileLake5 TexLake5 1 0
+Animation TileLake6 TexLake6 1 0
+Animation TileLake7 TexLake7 1 0
+Animation TileLake8 TexLake8 1 0
+Animation TileLake9 TexLake9 1 0
+Animation LinkAtkDown TexAtkDown 4 4
+Animation LinkAtkRight TexAtkRight 4 4
+Animation LinkAtkUp TexAtkUp 4 4
+Animation LinkMoveDown TexMoveDown 2 8
+Animation LinkMoveRight TexMoveRight 2 8
+Animation LinkMoveUp TexMoveUp 2 8
+Animation LinkStandDown TexStandDown 1 0
+Animation LinkStandRight TexStandRight 1 0
+Animation LinkStandUp TexStandUp 1 0
+Animation TileRock1 TexRock1 1 0
+Animation TileRock2 TexRock2 1 0
+Animation TileRock3 TexRock3 1 0
+Animation TileRock4 TexRock4 1 0
+Animation TileRock5 TexRock5 1 0
+Animation TileRock6 TexRock6 1 0
+Animation TileStair TexStair 1 0
+Animation TektiteStandFront TexTektiteStandFront 2 12
+Animation TileTreeMonster1 TexTreeMonster1 1 0
+Animation TileTreeMonster2 TexTreeMonster2 1 0
+Animation TileTreeMonster3 TexTreeMonster3 1 0
+Animation TileTreeMonster4 TexTreeMonster4 1 0
+Animation TileTreeMonster5 TexTreeMonster5 1 0
+Animation TileTreeMonster6 TexTreeMonster6 1 0
+Animation TileHeart TexHeart 1 0
+Sound SEnemyDamaged assets/sounds/zelda_EnemyDamaged.wav
+Sound SEnemyDied assets/sounds/zelda_EnemyDied.wav
+Sound SLinkDamaged assets/sounds/zelda_LinkDamaged.wav
+Sound SLinkDied assets/sounds/zelda_LinkDied.wav
+Sound SLinkLowHP assets/sounds/zelda_LinkLowHealth.wav
+Sound SLinkPickupHeart assets/sounds/zelda_PickupHeart.wav
+Sound SSwordSlash assets/sounds/zelda_SwordSlash.wav
+Sound SWalkingOnStairs assets/sounds/zelda_WalkingOnStairs.wav
+Sound STitleTheme assets/sounds/zelda_TitleTheme.ogg
+Font Mario assets/fonts/mario.ttf
+Font Tech assets/fonts/tech.ttf
