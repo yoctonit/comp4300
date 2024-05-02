@@ -141,6 +141,10 @@ float dot(vec2 lhs, vec2 rhs) {
     return lhs.x * rhs.x + lhs.y * rhs.y;
 }
 
+float cross(vec2 lhs, vec2 rhs) {
+    return lhs.x * rhs.y - lhs.y * rhs.x;
+}
+
 float distance(point2 lhs, point2 rhs) {
     return (lhs - rhs).length();
 }

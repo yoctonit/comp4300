@@ -10,7 +10,6 @@
 class Scene_Zelda : public Scene {
     struct PlayerConfig {
         float X, Y, CX, CY, SPEED, HEALTH;
-        // std::string WEAPON;
     };
 
 protected:
@@ -35,7 +34,7 @@ protected:
 
     void spawnPlayer();
 
-    void spawnSword(std::shared_ptr<Entity> entity);
+    void spawnSword(const std::shared_ptr<Entity> &entity);
 
     vec2 getPosition(int rx, int ry, int tx, int ty) const;
 
@@ -61,13 +60,15 @@ protected:
 
     void sDrag();
 
-    // void changePlayerStateTo(std::string s);
-
     void changePlayerStateTo(const std::string &state, const vec2 &facing);
 
     vec2 windowToWorld(const vec2 &pos);
 
     vec2 getRoomXY(const vec2 &pos);
+
+    void movementStart(const std::string &actionName);
+
+    void animatePlayer();
 
 public:
 

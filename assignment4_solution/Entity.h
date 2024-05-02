@@ -69,7 +69,7 @@ public:
     }
 
     template<class T>
-    void remove() const {
+    void remove() {
         get<T>() = T();
     }
 };

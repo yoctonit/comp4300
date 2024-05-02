@@ -82,6 +82,8 @@ vec2 normalize(vec2 a);
 
 float dot(vec2 lhs, vec2 rhs);
 
+float cross(vec2 lhs, vec2 rhs);
+
 float distance(point2 lhs, point2 rhs);
 
 float distance_squared(point2 lhs, point2 rhs);

@@ -44,7 +44,7 @@ public:
 
     [[nodiscard]] const sf::Font &getFont(const std::string &name) const;
 
-    [[nodiscard]] const sf::Sound &getSound(const std::string &name) const;
+    [[nodiscard]] sf::Sound &getSound(const std::string &name);
 };
 
 #endif //ASSETS_H

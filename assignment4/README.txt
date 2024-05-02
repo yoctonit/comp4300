@@ -235,21 +235,14 @@ Physics.cpp
 Scene_Zelda.h
 Scene_Zelda.cpp
 
-void Scene_Zelda::update() {
-    m_entityManager.update();
 
-    // TODO: implement pause functionality
-    if (!m_paused) {
-        sDrag();
-        sAI();
-        sMovement();
-        sStatus();
-        sAnimation();
-        sCollision();
-        sCamera();
-        m_currentFrame++;
-    }
+  ... = S N X1 Y1 X2 Y2 ... XN YN
+  Patrol Speed         S        float
+  Patrol Position      N        int (number of patrol positions)
+  Position 1-N         Xi Yi    int, int (Tile Position of Patrol Position i)
 
-    sGUI();
-    sRender();
-}
+
+NPC Name              RX RY TX TY BM BV H D AI
+NPC TektiteStandFront 0  0  2  8  0  0  3 1 Patrol 1 2 2 8 2 11
+
+                                                   0 0, 0 0, 2 8, 2 11,

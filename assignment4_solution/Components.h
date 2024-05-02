@@ -23,7 +23,7 @@ public:
 
     CTransform() = default;
 
-    explicit CTransform(const vec2 &p) : pos(p) {}
+    explicit CTransform(const vec2 &p) : pos(p), prevPos(p) {}
 
     CTransform(const vec2 &p, const vec2 &speed, const vec2 &s, float a)
             : pos(p), prevPos(p), velocity(speed), scale(s), angle(a) {}
