@@ -1,5 +1,12 @@
+file(COPY
+        fonts/tech.ttf
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/fonts)
+file(COPY
+        config.txt
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 add_executable(comp4300a1sol
-        main.cpp config.cpp rectangle.cpp circle.cpp)
+        main.cpp config.cpp)
 target_link_libraries(comp4300a1sol PRIVATE sfml-graphics)
 target_link_libraries(comp4300a1sol PRIVATE sfml-imgui)
 target_compile_features(comp4300a1sol PRIVATE cxx_std_17)

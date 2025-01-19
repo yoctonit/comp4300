@@ -7,86 +7,100 @@
 
 
 Config::Config(const std::string &file)
-        : m_windowConfig{640, 480}, m_fontConfig{} {
+        : window{640, 480}, font{} {
     std::ifstream infile(file);
 
     std::string line;
-    while (std::getline(infile, line)) {
-        // std::cout << "line: " << line << std::endl;
-
+    while (std::getline(infile, line))
+    {
         std::istringstream iss(line);
 
         std::string type;
-        if (!(iss >> type)) {
-            std::cerr << "Error reading type.\n";
+        if (!(iss >> type))
+        {
+            std::cerr << "Error reading configuration type.\n";
             break;
         }
-//        std::cout << "type: " << type << std::endl;
 
-        if (type == "Window") {
-            if (!(iss >> m_windowConfig.width >> m_windowConfig.height)) {
+        if (type == "Window")
+        {
+            if (!(iss >> window.width >> window.height))
+            {
                 std::cerr << "Error reading Window config.\n";
                 break;
             }
-
-        } else if (type == "Font") {
-            if (!(iss >> m_fontConfig.file >> m_fontConfig.size >> m_fontConfig.R >> m_fontConfig.G
-                      >> m_fontConfig.B)) {
+        }
+        else if (type == "Font")
+        {
+            if (!(iss >> font.file >> font.size >> font.R >> font.G >> font.B))
+            {
                 std::cerr << "Error reading Font config.\n";
                 break;
             }
-
-        } else if (type == "Rectangle") {
-            RectangleConfig rectangle;
-            if (!(iss >> rectangle.name >> rectangle.posX >> rectangle.posY >> rectangle.speedX >> rectangle.speedY
-                      >> rectangle.R >> rectangle.G >> rectangle.B >> rectangle.sizeX >> rectangle.sizeY)) {
+        }
+        else if (type == "Rectangle")
+        {
+            ShapeConfig shape;
+            shape.type = "rectangle";
+            if (!(iss >> shape.name >> shape.posX >> shape.posY >> shape.speedX >> shape.speedY
+                      >> shape.R >> shape.G >> shape.B >> shape.sizeX >> shape.sizeY))
+            {
                 std::cerr << "Error reading Rectangle config.\n";
                 break;
             }
-            m_rectangles.push_back(rectangle);
-
-        } else if (type == "Circle") {
-            CircleConfig circle;
-            if (!(iss >> circle.name >> circle.posX >> circle.posY >> circle.speedX >> circle.speedY
-                      >> circle.R >> circle.G >> circle.B >> circle.radius)) {
+            shapes.push_back(shape);
+        }
+        else if (type == "Circle")
+        {
+            ShapeConfig shape;
+            shape.type = "circle";
+            if (!(iss >> shape.name >> shape.posX >> shape.posY >> shape.speedX >> shape.speedY
+                      >> shape.R >> shape.G >> shape.B >> shape.radius))
+            {
                 std::cerr << "Error reading Circle config.\n";
                 break;
             }
-            m_circles.push_back(circle);
-
-        } else {
-            std::cerr << "Unknown type.\n";
+            shape.sizeX = 2 * shape.radius;
+            shape.sizeY = shape.sizeX;
+            shapes.push_back(shape);
+        }
+        else
+        {
+            std::cerr << "Unknown config type.\n";
         }
     }
 }
 
-WindowConfig Config::Window() const {
-    return m_windowConfig;
-}
+std::ostream &operator<<(std::ostream &os, const Config &config) {
+    os << "Game configuration:\n";
+    os << "-------------------\n";
 
-FontConfig Config::Font() const {
-    return m_fontConfig;
-}
+    os << "Window: " << config.window.width << " x " << config.window.height << "\n";
 
-const std::vector<RectangleConfig> &Config::Rectangles() const {
-    return m_rectangles;
-}
+    os << "Font:\n"
+       << "\t- file " << config.font.file << "\n"
+       << "\t- size " << config.font.size << "\n"
+       << "\t- color (" << config.font.R << ", " << config.font.G << ", " << config.font.B << ")\n";
 
-const std::vector<CircleConfig> &Config::Circles() const {
-    return m_circles;
-}
-
-void Config::Print() const {
-    std::cout << m_windowConfig.width << ", " << m_windowConfig.height << "\n";
-
-    std::cout << m_fontConfig.file << ", " << m_fontConfig.size << ", ("
-              << m_fontConfig.R << ", " << m_fontConfig.G << ", " << m_fontConfig.B << ")\n";
-
-    for (const auto &r: m_rectangles) {
-        std::cout << r.name << r.posX << r.posY << r.speedX << r.speedY << r.R << r.G << r.B << r.sizeX << r.sizeY
-                  << "\n";
+    for (const auto &shape: config.shapes)
+    {
+        if (shape.type == "rectangle")
+        {
+            os << "Rectangle " << shape.name << ":\n"
+               << "\t- position (" << shape.posX << ", " << shape.posY << ")\n"
+               << "\t- speed (" << shape.speedX << ", " << shape.speedY << ")\n"
+               << "\t- color (" << shape.R << shape.G << shape.B << ")\n"
+               << "\t- size (" << shape.sizeX << ", " << shape.sizeY << ")\n";
+        }
+        else if (shape.type == "circle")
+        {
+            os << "Circle " << shape.name << ":\n"
+               << "\t- position (" << shape.posX << ", " << shape.posY << ")\n"
+               << "\t- speed (" << shape.speedX << ", " << shape.speedY << ")\n"
+               << "\t- color (" << shape.R << shape.G << shape.B << ")\n"
+               << "\t- radius " << shape.sizeX << "\n";
+        }
     }
-    for (const auto &c: m_circles) {
-        std::cout << c.name << c.posX << c.posY << c.speedX << c.speedY << c.R << c.G << c.B << c.radius << "\n";
-    }
+
+    return os;
 }

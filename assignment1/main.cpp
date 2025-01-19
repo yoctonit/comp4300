@@ -22,6 +22,7 @@ int main(int argc, char* argv[])
 
     // scale the imgui ui by a given factor, does not affect text size
     ImGui::GetStyle().ScaleAllSizes(1.0f);
+    // ImGui::GetIO().FontGlobalScale = 2.0f; // this line affect text size
 
     // the imgui color {r, g, b} wheel requires floats from 0-1 instead of ints from 0-255
     float c[3] = {0.0f, 1.0f, 1.0f};
@@ -31,14 +32,14 @@ int main(int argc, char* argv[])
     int circleSegments = 32;    // number of segments to draw the circle with
     float circleSpeedX = 1.0f;  // we will use this to move the circle later
     float circleSpeedY = 0.5f;  // you will read these values from the file
-    bool drawCircle = true;     // wheter or not to draw the circle
-    bool drawText = true;       // wheter or not to draw the text
+    bool drawCircle = true;     // whether or not to draw the circle
+    bool drawText = true;       // whether or not to draw the text
 
     // create the sfml circle shape based on our parameters
     sf::CircleShape circle(circleRadius, circleSegments);   // create a circle shape with radius 50
     circle.setPosition(10.0f, 10.0f);                       // set the top-left position of the circle
 
-    // let's load a font so we can display some text
+    // let's load a font, so we can display some text
     sf::Font myFont;
 
     // attempt to load the font from a file
@@ -100,6 +101,7 @@ int main(int argc, char* argv[])
 
         // update imgui for this frame with the time that the last frame took
         ImGui::SFML::Update(window, deltaClock.restart());
+        // ImGui::ShowDemoWindow();
 
         // draw the UI
         ImGui::Begin("Window title");

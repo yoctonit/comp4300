@@ -1,60 +1,40 @@
-#ifndef COMP4300_CONFIG_H
-#define COMP4300_CONFIG_H
+#ifndef COMP4300_A1_CONFIG_H
+#define COMP4300_A1_CONFIG_H
 
+#include <iostream>
 #include <string>
 #include <vector>
 
 
-struct WindowConfig
-{
+struct WindowConfig {
     int width, height;
 };
 
-struct FontConfig
-{
+struct FontConfig {
     std::string file;
     int size;
-    int R, G, B; // color
+    int R, G, B;
 };
 
-struct RectangleConfig
-{
+struct ShapeConfig {
+    std::string type;
     std::string name;
     float posX, posY;
     float speedX, speedY;
-    int R, G, B; // color
-    float sizeX, sizeY;
+    int R, G, B;
+    float sizeX, sizeY{};
+    float radius{};
 };
 
-struct CircleConfig
-{
-    std::string name;
-    float posX, posY;
-    float speedX, speedY;
-    int R, G, B; // color
-    float radius;
-};
-
-class Config
-{
-private:
-    WindowConfig m_windowConfig;
-    FontConfig m_fontConfig;
-    std::vector<RectangleConfig> m_rectangles;
-    std::vector<CircleConfig> m_circles;
-
+class Config {
 public:
     explicit Config(const std::string &file);
 
-    [[nodiscard]] WindowConfig Window() const;
+    friend std::ostream &operator<<(std::ostream &os, const Config &config);
 
-    [[nodiscard]] FontConfig Font() const;
-
-    [[nodiscard]] const std::vector<RectangleConfig> &Rectangles() const;
-
-    [[nodiscard]] const std::vector<CircleConfig> &Circles() const;
-
-    void Print() const;
+    WindowConfig window;
+    FontConfig font;
+    std::vector<ShapeConfig> shapes;
 };
 
-#endif //COMP4300_CONFIG_H
+#endif //COMP4300_A1_CONFIG_H

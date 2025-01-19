@@ -1,3 +1,7 @@
+A note for people who are curious about different years/versions of this course:
+The 2023 version of the course was a significant upgrade over the 2022 version due to the inclusion of the ImGUI library. The 2024 version is nearly identical to 2023 with only minor changes.
+Read here for more details about the course: https://www.cs.mun.ca/~dchurchill/teaching/youtube.txt
+
 // collision programming involves 2 stages
 // collision detection
 // collision resolution
@@ -44,3 +48,5 @@ dy = abs(y2 -y2)
 // overlap in y-direction
 oy = (h2 / 2) + (h1 / 2) - dy // positive if y overlap
 overlap = [ox, oy]
+
+https://github.com/SFML/cmake-sfml-project/tree/master

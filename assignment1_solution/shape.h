@@ -2,56 +2,52 @@
 #define COMP4300_SHAPE_H
 
 #include <SFML/Graphics.hpp>
+#include <utility>
 
 
 class Shape {
 protected:
     std::string m_type;
     std::string m_name;
-
-    float m_posX, m_posY;
-    float m_sizeX, m_sizeY; // we use sizeX and sizeY as a radius for circle shape
-    float m_speedX, m_speedY;
-    float m_windowWidth, m_windowHeight;
-
-    unsigned char m_R, m_G, m_B;
-    float m_color[3];
-
-    int m_fontSize;
-    unsigned char m_fontColorR, m_fontColorG, m_fontColorB;
-
     bool m_visible = true;
-    sf::Text m_text;
 
+public:
+    float m_posX, m_posY;
+    float m_speedX, m_speedY;
+    int m_R, m_G, m_B;
+    float m_sizeX, m_sizeY;
+    float m_radius{}; // used for circle shape
     float m_scale = 1.0f;
 
 public:
-    Shape() = default;
+    Shape(
+            std::string type,
+            std::string name,
+            float posX, float posY,
+            float speedX, float speedY,
+            int red, int green, int blue,
+            float sizeX, float sizeY,
+            float radius
+    ) : m_type(std::move(type)), m_name(std::move(name)),
+        m_posX(posX), m_posY(posY),
+        m_speedX(speedX), m_speedY(speedY),
+        m_R(red), m_G(green), m_B(blue),
+        m_sizeX(sizeX), m_sizeY(sizeY), m_radius(radius) {}
 
-    virtual void Draw(sf::RenderWindow &window) const = 0;
+    [[nodiscard]] const std::string &Type() const { return m_type; }
 
-    virtual void Update() = 0;
+    [[nodiscard]] bool IsVisible() const { return m_visible; }
 
-    std::string Name() const { return m_type + ": " + m_name; }
+    void SetVisible(bool visible) { m_visible = visible; }
 
-    bool &Visibility() { return m_visible; }
+    [[nodiscard]] float GetScale() const { return m_scale; }
 
-    float *Color() { return m_color; }
+    void SetScale(float scale) { m_scale = scale; }
 
-    float *ScaleRef() { return &m_scale; }
+    [[nodiscard]] const std::string &Name() const { return m_name; }
 
-    float *VelocityXRef() { return &m_speedX; }
-    float *VelocityYRef() { return &m_speedY; }
+    void SetName(const std::string &name) { m_name = name; }
 
-    virtual void SetColor() = 0;
-
-    void SetName(const char * n) {
-        m_text.setString(std::string(n));
-    }
-
-    virtual void CalculateNamePosition() {}
-
-//    sf::Drawable getShape();
 };
 
 #endif //COMP4300_SHAPE_H
