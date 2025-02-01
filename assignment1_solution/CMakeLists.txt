@@ -3,7 +3,7 @@ file(COPY
         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/fonts)
 file(COPY
         config.txt
-        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/config_a1.txt)
 
 add_executable(comp4300a1sol
         main.cpp config.cpp)
