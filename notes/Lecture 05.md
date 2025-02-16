@@ -267,7 +267,216 @@ Using `std::tuple`
 ```
 // declare tuple of various types
 std::tuple<int, double, int, float, size_t> myTuple;
+// if type present only once, can std::get by type
+std::get<double>(myTupple) = 3.14159;
+// if not unique, you can specify the 'index'
+std::get<2>(myTuple) = 42;
+// same syntax used to get values for use
+std::cout << std::get<double>(myTuple) << "\n";
+// can also initialize with different types
+std::tuple<int, std::string, float> myTuple(42, "Hello", 3.14f);
 ```
 
+Entity Functions: get
+```
+template <typename T>
+T & get()
+{
+  return std::get<T>(m_components);
+}
+// const version to keep const correctness
+template <typename T>
+const T & get()
+{
+  return std::get<T>(m_components);
+}
+```
 
-45:00
+Entity Functions: has/remove
+```
+template <typename T>
+bool has() const
+{
+  return get<T>().exists;
+}
+
+template <typename T>
+void remove()
+{
+  get<T>() = T();
+}
+```
+
+Entity Functions: add
+```
+template <typename T, typename... TArgs>
+T& add(Targs&&... mArgs)
+{
+  auto & component = get<T>();
+  component = T(std::forward<TArgs>(mArgs)...);
+  component.exists = true;
+  return component;
+}
+// component default constructor sets 'exists' to false
+// only set it to true when we explicitly add a component
+```
+
+Component Implementation
+* We will have a different Component class for each Component we want to implement
+* Naming: class `CComponentName`
+* Components will inherit from a base Component class which stores any data we want to be common to all components
+
+Component Base Class
+```
+class Component
+{
+public:
+  bool exists = false;
+};
+// exists = whether entity actually contains the derived component
+// default to false so default constructed components
+// are not considered part of the Entity
+```
+
+ECS Component: CTransform
+```
+class CTransform : public Component
+{
+public:
+  Vec2 pos = {0,0};
+  Vec2 velocity = {0,0};
+  CTransform() {}
+  CTransform(const Vec2 & p, const Vec2 & v)
+    : pos(p), velocity(v) {}
+};
+```
+
+ECS Component: CShape
+```
+class CShape : public Component
+{
+public:
+  sf::CircleShape shape;
+  CShape() {}
+};
+```
+
+ECS Component: CLifeSpan
+```
+class CLifeSpan : public Component
+{
+public:
+  int totalLifespan = 0;
+  int remainingLifespan = 0;
+  CLifeSpan() {}
+  CLifeSpan(int totalLifespan)
+    : totalLifespan(totalLifespan)
+    , remainingLifespan(totalLifespan) {}
+};
+```
+
+Using Entities
+```
+void doStuff(std::vector<Entity> & entities)
+{
+  for (auto& e : entities)
+  {
+    e.get<CTransform>().pos += e.cTransform.velocity;
+    e.get<CShape>().shape.setPosition(e.cTransform.pos);
+    window.draw(e.get<CShape>().shape);
+  }
+}
+```
+
+ECS: Systems
+```
+void sMovement(std::vector<Entity> & entities)
+{
+  for (auto& e : entities)
+  {
+    e.get<CTransform>().pos += e.cTransform.velocity;
+  }
+}
+```
+* Some systems only operate on entities which contain certain Components
+	* Movement: CTransform
+	* Render: CTransform + CShape
+	* Physics: CBoundingBox
+* We can filter entities before passing them into system, or just check entities for required components before using them
+```
+void sLifespan()
+{
+  for (auto& e : m_entityManager.getEntities())
+  {
+    if (!e->has<CLifespan()) { continue; }
+    e.get<CLifespan>().remainingLifespan--;
+    if (e.get<CLifespan>().remainingLifespan <= 0)
+    {
+      e.destroy();
+    }
+  }
+}
+```
+```
+void sRender()
+{
+  for (auto& e : m_entityManager.getEntities())
+  {
+    if (e.has<CShape() && e.has<CTransform>)
+    {
+      e.get<CShape>().shape.setPosition(e.get<CTransform>().pos);
+      window.draw(e.get<CShape>().shape);
+    }
+  }
+}
+```
+* Diagram at 59:20
+
+Vectors in Games
+* For 2D games, many quantities/properties of game objects have both an X and a Y coordinate, these form a 2D Vector
+	* Mathematical Vector, not collection vector
+* Example: Position(x, y) and Velocity(x, y)
+* Annoying to store/refer to x and y separately
+* Let's make a 2D Vector class: Vec2
+
+Notes on Vec2
+* We will go more in-depth on vector math for games later in the course
+* We first introduce the programming architecture, then later use it to implement game math/physics concepts
+* Note: `sf::Vector2f` already exists, we will basically be reinventing it in this course
+
+Vec2 Class
+* What do we want to store in Vec2?
+	* Member variables x, y
+* What do we want to do with those values?
+	* Functions/Operations on Vec2
+* Possible Operations on Vec2
+	* `+, -, *, /`
+	* length, normalize, rotate, etc...
+```
+class Vec2
+{
+public:
+  float x = 0, y = 0;
+  Vec2();
+  Vec2(float xin, float yin);
+  bool operator == (const Vec2 & rhs) const;
+  Vec2 operator + (const Vec2 & rhs) const;
+  Vec2 operator * (const Vec2 & rhs) const;
+  void operator += (const Vec2 & rhs);
+};
+```
+
+Vec2 Sample Usage
+```
+Vec2 pos      (100,  200);
+Vec2 velocity ( -5,   10);
+Vec2 accel    (  0, -9.8);
+while (true)
+{
+  pos += velocity;
+  velocity += accel;
+}
+float dist = velocity.length();
+```
+* Live coding at 1:04:30
+* I have code of Vec2 class starting in assignment 2, so I won't take notes of code here.

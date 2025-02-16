@@ -53,7 +53,7 @@ Score:
 Drawing:
 - In the render system, all entities should be given a slow rotation, which makes the game look a little nicer.
 - Any special effects which do not alter game play can be added for up to 5% bonus marks on the assignment. Note that assignments cannot go above 100% total marks, but the 5% bonus can overwrite any marks lost in other areas of the assignment.
-- Any Entity with a lifespan is currently alive, it should have its Color alpha channel set to a ration depending on how long it has left to live. For example, if an Entity has an 80 frame life span, and 25 frames remaining, its alpha value should be set to (float)25/80*255. The alpha should go from 255 when it is first spawned, to 0 on the last frame it is alive.
+- Any Entity with a lifespan that is currently alive, it should have its Color alpha channel set to a ration depending on how long it has left to live. For example, if an Entity has an 80 frame life span, and 25 frames remaining, its alpha value should be set to (float)25/80*255. The alpha should go from 255 when it is first spawned, to 0 on the last frame it is alive.
 
 GUI:
 - You must construct a GUI using ImGui which has the following functionality:

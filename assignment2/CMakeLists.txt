@@ -1,3 +1,10 @@
+file(COPY
+        fonts/tech.ttf
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/fonts)
+file(COPY
+        config.txt
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 add_executable(comp4300a2 main.cpp Entity.cpp EntityManager.cpp Game.cpp Vec2.cpp)
 target_link_libraries(comp4300a2 PRIVATE sfml-graphics)
 target_link_libraries(comp4300a2 PRIVATE sfml-imgui)
