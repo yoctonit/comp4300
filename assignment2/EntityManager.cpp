@@ -27,7 +27,7 @@ void EntityManager::update() {
 }
 
 void EntityManager::removeDeadEntities(EntityVec &vec) {
-    // TODO: remove all dead entities from the input vecotr
+    // TODO: remove all dead entities from the input vector
     // this is called by the update() function
 
     // for (auto e: m_entities)

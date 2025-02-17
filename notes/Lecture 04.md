@@ -1,6 +1,6 @@
 
 [COMP4300 - Game Programming - Lecture 04 - SFML + ImGui Tutorial](https://youtu.be/cK_LbRWaIOU?si=6pJKobPtrM7bwgXo)
-Komentar: Dodao sam Makefile. Tj. prekucao ga sa ekrana. Mada on ne radi ovakav kakav je, jer sam ja koristio cmake u svom podesavanju projekta, tako da putanje nistu iste. ALi sam ga dodao zbog celine i reference.
+Komentar: Dodao sam Makefile. Tj. prekucao ga sa ekrana. Mada on ne radi ovakav kakav je, jer sam ja koristio cmake u svom podesavanju projekta, tako da putanje nistu iste. Ali sam ga dodao zbog celine i reference.
 
 make -j 8 # compile with parallelism of 8 threads
 make run -j 8

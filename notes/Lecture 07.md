@@ -1,5 +1,10 @@
 [COMP4300 - Game Programming - Lecture 07 - Assignment 2](https://youtu.be/-ugbLQlw_VM?si=tHpGrcjkDbjppqsE)
 
+Komentar: Kroz ovu lekciju koja objasnjava Zadatak 2 sam zaustavljajuci video, prepisao osnovni kod koji je dat studentima i koji treba da dopune i dorade da rese zadatak. Kod se nalazi u folderu assignment2 u comp4300 projektu. Jedino sto sam umesto Makefile-a koristio CMakeLists.txt file.
+Kod za verziju kursa 2024-09 se malo razlikuje od verzije 2023-09.
+Jedna od razlika (mada ne velika) je implementacija Komponenti (Components.h), koja se prenosi i na implementaciju Entity klase i dalje u koriscenju Entity klase.
+Druga razlika je implementacija EntityManager klase. Opet, moze se reci ne velika.
+
 Engine Architecture Progression
 * Assignment 1
 	* Getting used to C++/API
@@ -39,7 +44,7 @@ EntityManager
 	* No Iterator Invalidation
 * Secondary map from tag->entity
 	* Trade storage for convenience/run time
-* Can do other book-keeping like mem mgmt
+* Can do other bookkeeping like mem mgmt
 
 Game
 * Top-Level Game Object
@@ -74,5 +79,3 @@ Game Scene
 	* World-Map Scene
 	* Combat/Battle Scene
 * How can our architecture allow for different game states?
-
-46:30

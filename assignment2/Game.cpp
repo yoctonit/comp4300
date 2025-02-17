@@ -16,6 +16,10 @@ void Game::init(const std::string &path) {
 
     ImGui::SFML::Init(m_window);
 
+    // scale the imgui ui and text size by 2
+    ImGui::GetStyle().ScaleAllSizes(2.0f);
+    ImGui::GetIO().FontGlobalScale = 2.0f;
+
     spawnPlayer();
 }
 
@@ -89,7 +93,7 @@ void Game::spawnSmallEnemies(std::shared_ptr<Entity> e) {
     // TODO: spawn small enemies at the location of the input enemy e
 
     // when we create the smaller enemy, we have to read the values of the original enemy
-    // - spawn a nubmer of samll enemies equal to the vertices of the original enemy
+    // - spawn a number of small enemies equal to the vertices of the original enemy
     // - set each small enemy to the same color as the original, half the size
     // - small enemies are worth double points of the original enemy
 }
