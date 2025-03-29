@@ -28,7 +28,8 @@ void Game::run() {
     // - add pause functionality in here
     // - some systems should function while paused (rendering)
     // - some systems shouldn't (movement / input)
-    while (m_running) {
+    while (m_running)
+    {
         // update the entity manager
         m_entities.update();
 
@@ -54,7 +55,7 @@ void Game::setPaused(bool paused) {
 
 // respawn the player in the middle of the screen
 void Game::spawnPlayer() {
-    // TODO: Finish adding all properties of the player with the correct values from 
+    // TODO: Finish adding all properties of the player with the correct values from config
 
     // We create every entity by calling EntityManager.addEntity(tag)
     // This returns a std::shared_ptr<Entity>, so we use 'auto' to save typing
@@ -78,7 +79,7 @@ void Game::spawnPlayer() {
 void Game::spawnEnemy() {
     // TODO:
     // make sure the enemy is spawned properly with the m_enemyConfig variables
-    // the enemy must be spawnedcompletely within the bounds of the window
+    // the enemy must be spawned completely within the bounds of the window
 
     // auto e = m_entities.addEntity("enemy");
     // e->cTransform = std::make_shared<CTransform>(args);
@@ -111,9 +112,10 @@ void Game::spawnSpecialWeapon(std::shared_ptr<Entity> entity) {
 
 void Game::sMovement() {
     // TODO: implement all entity movement in this function
-    // you should read the m_player-cInput component to determine if the player is moving
+    // you should read the m_player->cInput component to determine if the player is moving
     // sample:
-    for (auto e: m_entities.getEntities()) {
+    for (auto e: m_entities.getEntities())
+    {
         // if entity has transform component...
     }
 
@@ -123,7 +125,7 @@ void Game::sMovement() {
 }
 
 void Game::sLifespan() {
-    // TODO: implement all lifespan fuctionality
+    // TODO: implement all lifespan functionality
     //
     // for all entities
     // - if entity has no lifespan component, skip it
@@ -184,18 +186,22 @@ void Game::sUserInput() {
     // the movement system will read the variables you set in this functioin
 
     sf::Event event;
-    while (m_window.pollEvent(event)) {
+    while (m_window.pollEvent(event))
+    {
         // pass the event to imgui to be parsed
         ImGui::SFML::ProcessEvent(m_window, event);
 
         // this event triggers when the window is closed
-        if (event.type == sf::Event::Closed) {
+        if (event.type == sf::Event::Closed)
+        {
             m_running = false;
         }
 
         // this event is triggered when a key is pressed
-        if (event.type == sf::Event::KeyPressed) {
-            switch (event.key.code) {
+        if (event.type == sf::Event::KeyPressed)
+        {
+            switch (event.key.code)
+            {
                 case sf::Keyboard::W:
                     std::cout << "W Key Pressed\n";
                     // TODO: set player's input component "up" to true
@@ -207,8 +213,10 @@ void Game::sUserInput() {
         }
 
         // this event is triggered when a key is released
-        if (event.type == sf::Event::KeyReleased) {
-            switch (event.key.code) {
+        if (event.type == sf::Event::KeyReleased)
+        {
+            switch (event.key.code)
+            {
                 case sf::Keyboard::W:
                     std::cout << "W Key Released\n";
                     // TODO: set player's input component "up" to false
@@ -220,17 +228,21 @@ void Game::sUserInput() {
 
         }
 
-        if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.type == sf::Event::MouseButtonPressed)
+        {
             // this line ignores mouse events if ImGui is the thing being clicked
-            if (ImGui::GetIO().WantCaptureMouse) { continue; }
+            if (ImGui::GetIO().WantCaptureMouse)
+            { continue; }
 
-            if (event.mouseButton.button == sf::Mouse::Left) {
+            if (event.mouseButton.button == sf::Mouse::Left)
+            {
                 std::cout << "Left Mouse Button Clicked at(" << event.mouseButton.x
                           << ", " << event.mouseButton.y << ")\n";
                 // TODO: call spawnBullet here
             }
 
-            if (event.mouseButton.button == sf::Mouse::Right) {
+            if (event.mouseButton.button == sf::Mouse::Right)
+            {
                 std::cout << "Right Mouse Button Clicked at(" << event.mouseButton.x
                           << ", " << event.mouseButton.y << ")\n";
                 // TODO: call special weapon here

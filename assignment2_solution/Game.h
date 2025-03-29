@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include <random>
-#include <time.h>
+#include <ctime>
 
 #include "Entity.h"
 #include "EntityManager.h"
@@ -31,6 +31,18 @@ class Game {
     bool m_pause = false;
     bool m_running = true;
     int m_lastEnemySpawnTime = 0;
+    int m_lastSpecialWeaponActivated = 0;
+    int m_lastSpecialWeaponInterval = 300; // every 5 seconds
+
+    // gui controlled variables
+    bool m_enableMovementSystem = true;
+    bool m_enableLifespanSystem = true;
+    bool m_enableCollisionSystem = true;
+    bool m_enableSpawningSystem = true;
+    bool m_enableGuiSystem = true;
+    bool m_enableRenderingSystem = true;
+    int m_spawningInterval{};;
+    // bool m_manualSpawn = false;
 
     std::random_device m_rd;
     typedef std::mt19937 MyRng;
@@ -39,7 +51,8 @@ class Game {
     std::uniform_int_distribution<int> m_randomEnemyPositionY;
     std::uniform_int_distribution<int> m_randomColor;
     std::uniform_int_distribution<int> m_randomNumberOfVertices;
-    std::uniform_int_distribution<int> m_randomAngle;
+    std::uniform_real_distribution<float> m_randomAngle;
+    std::uniform_real_distribution<float> m_randomSpeed;
 
     void init(const std::string &path);
 
@@ -57,10 +70,17 @@ class Game {
 
     void sCollision();
 
+    std::string getScoreText() const;
+
+    std::string getSpecialWeaponText() const;
+
+    std::string getButtonId(size_t entityId) const;
+
+    void renderEntityList(const EntityVec & entities) const;
+
 public:
     explicit Game(const std::string &config);
 
-    // void update();
     void run();
 
     void setPaused(bool paused);
@@ -69,11 +89,11 @@ public:
 
     void spawnEnemy();
 
-    void spawnSmallEnemies(const std::shared_ptr<Entity>& e);
+    void spawnSmallEnemies(const std::shared_ptr<Entity> &e);
 
-    void spawnBullet(const std::shared_ptr<Entity>& entity, const vec2 &target);
+    void spawnBullet(const std::shared_ptr<Entity> &entity, const vec2 &target);
 
-    void spawnSpecialWeapon(const std::shared_ptr<Entity>& entity);
+    void spawnSpecialWeapon(/* const std::shared_ptr<Entity> &entity */);
 };
 
 #endif //GAME_H

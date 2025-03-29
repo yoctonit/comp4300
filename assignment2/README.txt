@@ -121,7 +121,7 @@ I recommend approaching this assignment in the following order:
 1. Implement the Vec2 class, which you will use for all Components
 2. Implement the basic functionality in the EntityManager class. Implement the EntityManager's addEntity() and update() functions so you can start testing the Game class quickly. Don't worry about the update() function which deletes dead entities until later when you get more game mechanics working.
 3. Implement basics of the Game class:
-  3.1. Construct a player Entity using the spawn Player() function
+  3.1. Construct a player Entity using the spawnPlayer() function
   3.2. Implement basic drawing of entities using the Game::sRender() function
   3.3. Construct some enemies using the spawnEnemy() function
   3.4. Construct a bullet using the spawnBullet() function

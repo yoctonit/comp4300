@@ -42,10 +42,10 @@ void EntityManager::removeDeadEntities(EntityVec &vec) {
 }
 
 std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
-    // // create a new Entity object
-    // // store it in the vector of all entities
-    // // store it in the map of tag->entityvector
-    // // return the shared pointer pointing to that entity
+    // create a new Entity object
+    // store it in the vector of all entities
+    // store it in the map of tag->entityVector
+    // return the shared pointer pointing to that entity
     // auto e = std::make_shared<Entity>(tag, m_totalEntities++);
     // m_entities.push_back(e);
     // m_entityMap[tag].push_back(e);
@@ -57,7 +57,7 @@ std::shared_ptr<Entity> EntityManager::addEntity(const std::string &tag) {
 }
 // note: above code doesn't handle some map-related edge cases
 
-EntityVec & EntityManager::getEntities() {
+EntityVec &EntityManager::getEntities() {
     return m_entities;
 }
 

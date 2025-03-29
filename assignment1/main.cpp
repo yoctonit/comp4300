@@ -32,8 +32,8 @@ int main(int argc, char* argv[])
     int circleSegments = 32;    // number of segments to draw the circle with
     float circleSpeedX = 1.0f;  // we will use this to move the circle later
     float circleSpeedY = 0.5f;  // you will read these values from the file
-    bool drawCircle = true;     // whether or not to draw the circle
-    bool drawText = true;       // whether or not to draw the text
+    bool drawCircle = true;     // whether to draw the circle
+    bool drawText = true;       // whether to draw the text
 
     // create the sfml circle shape based on our parameters
     sf::CircleShape circle(circleRadius, circleSegments);   // create a circle shape with radius 50

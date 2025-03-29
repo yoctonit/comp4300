@@ -21,8 +21,6 @@ class EntityManager {
 
     static void removeDeadEntities(EntityVec &vec);
 
-    // void init();
-
 public:
     EntityManager();
 
@@ -30,7 +28,7 @@ public:
 
     std::shared_ptr<Entity> addEntity(const std::string &tag);
 
-    EntityVec & getEntities();
+    EntityVec &getEntities();
 
     EntityVec &getEntities(const std::string &tag);
 
